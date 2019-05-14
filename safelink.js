@@ -123,11 +123,14 @@ function auto_safeconvert() {
     /*TAMBAH DISINI LINK POSTINGANNYA*/
     
     var daftarPostingan = [
-      "masukan url postingan blog safelink kamu disini",
-      "masukan url postingan blog safelink kamu disini",
-      "masukan url postingan blog safelink kamu disini",
-      "masukan url postingan blog safelink kamu disini",
-      "masukan url postingan blog safelink kamu disini",
+      "//www.gudanganime.com/2019/05/how-to-pick-health-insurance-plan.html",
+      "//www.gudanganime.com/2019/05/worlds-top-5-insurance-companies.html",
+      "//www.gudanganime.com/2019/05/insurance-aaa-travel-insurance.html",
+      "//www.gudanganime.com/2019/05/insurance-state-farm.html",
+      "//www.gudanganime.com/2019/05/insurance-allstate-company.html",
+      "//www.gudanganime.com/2019/05/insurance-liberty-mutual.html",
+      "//www.gudanganime.com/2019/05/insurance-smarthealth-maxi-violet.html",
+      "//www.gudanganime.com/2019/05/best-five-health-company-insurance.html",
     ];
     /* Jika ingin menambah postingan, copas saja */
 
