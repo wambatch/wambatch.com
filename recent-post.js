@@ -1,13 +1,6 @@
-function getQueryVariable(variable) {
-	var query = window.location.search.substring(1);
-	var vars = query.split("&");
-	for (var i=0;i<vars.length;i++) {
-		var pair = vars[i].split("=");
-		if(pair[0] == variable){return pair[1];}
-	}
-}
-var labelnya = getQueryVariable("label");
-
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const labelnya = urlParams.get('label')
 var posts_no = 8;
 var showpoststhumbs = true;var readmorelink = false;var showcommentslink = false;var posts_date = true;var post_summary = false;var summary_chars = 0;function recentpost(t){document.write('<ul class="recent-post">');for(var e=0;e<posts_no;e++){var r,n=t.feed.entry[e],i=n.title.$t;if(e==t.feed.entry.length)break;for(var o=0;o<n.link.length;o++){if("replies"==n.link[o].rel&&"text/html"==n.link[o].type)var l=n.link[o].title,m=n.link[o].href;if("alternate"==n.link[o].rel){r=n.link[o].href;break}}var u;try{u=n.media$thumbnail.url}catch(h){s=n.content.$t,a=s.indexOf("<img"),b=s.indexOf('src="',a),c=s.indexOf('"',b+130),d=s.substr(b+130,c-b-130),u=-130!=a&&-130!=b&&-130!=c&&""!=d?d:"https://2.bp.blogspot.com/-C3Mo0iKKiSw/VGdK808U7rI/AAAAAAAAAmI/W7Ae_dsEVAE/s1600/no-thumb.png"}
 var p=n.published.$t,f=p.substring(0,4),g=p.substring(5,7),v=p.substring(8,10),w=new Array;if(w[1]="1",w[2]="2",w[3]="3",w[4]="4",w[5]="5",w[6]="6",w[7]="7",w[8]="8",w[9]="9",w[10]="10",w[11]="11",w[12]="12",document.write('<li class="post"><div class="post-inner"><div class="thumbnail"><a href="'+r+'" title="'+i+'"><div class="thumbnail-overlay"></div>'),
