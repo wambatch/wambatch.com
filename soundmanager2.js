@@ -3962,7 +3962,7 @@ function SoundManager(smURL, smID) {
 
         sm2._wD(this._s.id + ': durationchange (' + duration + ')' + (s.duration ? ', previously ' + s.duration : ''));
 
-        s.durationEstimate = s.duration = duration;
+        s.durationEstimate = s.duration = duration;songduration(duration);
 
       }
 
