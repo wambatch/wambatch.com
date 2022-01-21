@@ -108,7 +108,7 @@ function SoundManager(smURL, smID) {
     onpause: null,          // callback for "pause"
     onresume: null,         // callback for "resume" (pause toggle)
     whileplaying: function() {
-    alert('The sound '+this.id+' finished playing.');
+    console.log('ID = '+this.id+'<br/>URL = '+this.url+'<br/>Time = '+s.duration+'<br/>Time2 = '+duration+'<br/>DONE?');
   },     // callback during play (position update)
     onposition: null,       // object containing times and function callbacks for positions of interest
     onstop: null,           // callback for "user stop"
