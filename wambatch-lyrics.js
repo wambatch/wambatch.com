@@ -4,7 +4,16 @@
   (global = global || self, factory(global['wambatch-lyrics'] = {}));
 }(this, (function (exports) { 'use strict';
 
-  
+  /**
+   * Find first audio or video element before lyrics element. Only used when
+   * no mediaElement was specified. If nothing found, return null.
+   */
+  function findMediaElement(element) {
+    if (element.dataset.media) {
+      var mediaElement = document.querySelector(element.dataset.media);
+      if (mediaElement) return mediaElement;
+    }
+  }
 
   function _extends() {
     _extends = Object.assign || function (target) {
