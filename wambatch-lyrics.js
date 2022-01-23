@@ -241,7 +241,7 @@
        */
 
 
-      this.synchronize = function () {
+      function this.synchronize() {
         var time = _this.mediaElement.currentTime;
         var changed = false; // If here are active lines changed
 
