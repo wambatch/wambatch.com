@@ -4,38 +4,7 @@
   (global = global || self, factory(global['wambatch-lyrics'] = {}));
 }(this, (function (exports) { 'use strict';
 
-  /**
-   * Find first audio or video element before lyrics element. Only used when
-   * no mediaElement was specified. If nothing found, return null.
-   */
-  function findMediaElement(element) {
-    if (element.dataset.media) {
-      var mediaElement = document.querySelector(element.dataset.media);
-      if (mediaElement) return mediaElement;
-    }
-
-    var previousElement = element.previousElementSibling; // First, lookup siblings before
-
-    while (previousElement) {
-      if (previousElement.tagName.toLowerCase() === 'audio' || previousElement.tagName.toLowerCase() === 'video') {
-        return previousElement;
-      } else {
-        var mediaChildren = previousElement.querySelectorAll('audio, video');
-
-        if (mediaChildren.length > 0) {
-          return mediaChildren.item(mediaChildren.length - 1);
-        }
-      }
-
-      previousElement = previousElement.previousElementSibling;
-    }
-
-    if (element.parentElement) {
-      return findMediaElement(element.parentElement);
-    } else {
-      return null;
-    }
-  }
+  
 
   function _extends() {
     _extends = Object.assign || function (target) {
