@@ -241,12 +241,13 @@
        */
 
 
-      this.synchronize = function () {
+      this.synchronize = function (getWaktu) {
         var time = _this.mediaElement.currentTime;
+        var waktu = getWaktu;
         var changed = false; // If here are active lines changed
 
         var activeLines = _this.lyricsLines.filter(function (line) {
-          if (time >= line.startsAt && time < line.endsAt) {
+          if (waktu >= line.startsAt && waktu < line.endsAt) {
             // If line should be active
             if (!line.element.classList.contains('rabbit-lyrics__line--active')) {
               // If it hasn't been activated
@@ -255,7 +256,7 @@
             }
 
             line.content.forEach(function (inline) {
-              if (time >= inline.startsAt) {
+              if (waktu >= inline.startsAt) {
                 inline.element.classList.add('rabbit-lyrics__inline--active');
               } else {
                 inline.element.classList.remove('rabbit-lyrics__inline--active');
@@ -302,6 +303,11 @@
       // Rest scroll bar
 
       this.lyricsElement.scrollTop = 0; // Bind playback update events
+
+      var readTime = function(getTime){
+        this.synchronize(getTime);
+        console.log("!!!!!!!!!  WAKTU = "+getTime)
+      }
 
       this.mediaElement.addEventListener('timeupdate', this.synchronize);
       this.mediaElement.addEventListener('play', this.handleStatusChange);
