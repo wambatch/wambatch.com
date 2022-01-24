@@ -1,9 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-    typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = global || self, factory(global['wambatch-lyrics'] = {}));
-}(this, (function (exports) {
-  'use strict';
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = global || self, factory(global['wambatch-lyrics'] = {}));
+}(this, (function (exports) { 'use strict';
 
   /**
    * Find first audio or video element before lyrics element. Only used when
@@ -80,7 +79,6 @@
   var timeRegex = /\[(\d+:)?\d+:\d+\.\d+\]/;
   var startRegex = /^\[(\d+:)?\d+:\d+\.\d+\]/;
   var endRegex = /\[(\d+:)?\d+:\d+\.\d+\]$/;
-
   function parseLyrics(source) {
     var lines = source.trim().split(/\r\n|\n|\r/).map(function (line) {
       return line.trim();
@@ -193,21 +191,18 @@
    * RabbitLyrics main controller.
    */
 
-  var RabbitLyrics = /*#__PURE__*/ function () {
+  var RabbitLyrics = /*#__PURE__*/function () {
     function RabbitLyrics(
-      /** Lyrics container element. Support data-* attributes for options. */
-      lyricsElement,
-      /** Audio or video element. Note: embeded media elements in <iframe> are not supported. */
-      mediaElement,
-      /** Wambatch Player Time */
-      wambatchTime,
-      /** Lyrics options. */
-      options) {
+    /** Lyrics container element. Support data-* attributes for options. */
+    lyricsElement,
+    /** Audio or video element. Note: embeded media elements in <iframe> are not supported. */
+    mediaElement,
+    /** Lyrics options. */
+    options) {
       var _this = this;
 
       this.lyricsElement = lyricsElement;
       this.mediaElement = mediaElement;
-      this.wambatchTime = wambatchTime;
       this.viewMode = 'clip';
       this.alignment = 'center';
       this.lyrics = '';
@@ -253,28 +248,28 @@
         var activeLines = _this.lyricsLines.filter(function (line) {
           if (time >= line.startsAt && time < line.endsAt) {
             // If line should be active
-            if (!line.element.classList.contains('wambatch-lyrics__line--active')) {
+            if (!line.element.classList.contains('rabbit-lyrics__line--active')) {
               // If it hasn't been activated
               changed = true;
-              line.element.classList.add('wambatch-lyrics__line--active');
+              line.element.classList.add('rabbit-lyrics__line--active');
             }
 
             line.content.forEach(function (inline) {
               if (time >= inline.startsAt) {
-                inline.element.classList.add('wambatch-lyrics__inline--active');
+                inline.element.classList.add('rabbit-lyrics__inline--active');
               } else {
-                inline.element.classList.remove('wambatch-lyrics__inline--active');
+                inline.element.classList.remove('rabbit-lyrics__inline--active');
               }
             });
             return true;
           } else {
             // If line should be inactive
-            if (line.element.classList.contains('wambatch-lyrics__line--active')) {
+            if (line.element.classList.contains('rabbit-lyrics__line--active')) {
               // If it hasn't been deactivated
               changed = true;
-              line.element.classList.remove('wambatch-lyrics__line--active');
+              line.element.classList.remove('rabbit-lyrics__line--active');
               line.content.forEach(function (inline) {
-                inline.element.classList.remove('wambatch-lyrics__inline--active');
+                inline.element.classList.remove('rabbit-lyrics__inline--active');
               });
             }
 
@@ -352,7 +347,7 @@
 
       this.lyricsLines = parseLyrics(this.lyrics).map(function (line) {
         var lineElement = document.createElement('div');
-        lineElement.className = 'wambatch-lyrics__line';
+        lineElement.className = 'rabbit-lyrics__line';
         lineElement.addEventListener('click', function () {
           _this2.mediaElement.currentTime = line.startsAt;
 
@@ -360,7 +355,7 @@
         });
         var lineContent = line.content.map(function (inline) {
           var inlineElement = document.createElement('span');
-          inlineElement.className = 'wambatch-lyrics__inline';
+          inlineElement.className = 'rabbit-lyrics__inline';
           inlineElement.textContent = inline.content;
           lineElement.append(inlineElement);
           return _extends({}, inline, {
@@ -402,12 +397,10 @@
   }();
 
   function styleInject(css, ref) {
-    if (ref === void 0) ref = {};
+    if ( ref === void 0 ) ref = {};
     var insertAt = ref.insertAt;
 
-    if (!css || typeof document === 'undefined') {
-      return;
-    }
+    if (!css || typeof document === 'undefined') { return; }
 
     var head = document.head || document.getElementsByTagName('head')[0];
     var style = document.createElement('style');
@@ -430,7 +423,7 @@
     }
   }
 
-  var css_248z = ".wambatch-lyrics{position:relative;padding:1em 0;height:16.5em;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth;background-color:#fff;border:1px solid #ddd}.wambatch-lyrics--center{text-align:center}.wambatch-lyrics--left{text-align:left}.wambatch-lyrics--right{text-align:right}.wambatch-lyrics__line{line-height:1.5em;min-height:1.5em;padding:0 1em}.wambatch-lyrics__line--active{background-color:rgba(0,0,0,.1)}.wambatch-lyrics__inline--active{color:#04a8a8}.wambatch-lyrics--mini{height:1.5em;overflow-y:hidden}.wambatch-lyrics--mini .wambatch-lyrics__line{display:none}.wambatch-lyrics--mini .wambatch-lyrics__line--active{display:block;background:transparent}.wambatch-lyrics--full{height:auto;overflow-y:initial}";
+  var css_248z = ".wambatch-lyrics{position:relative;padding:1em 0;height:16.5em;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth;background-color:#fff;border:1px solid #ddd}.wambatch-lyrics--center{text-align:center}.wambatch-lyrics--left{text-align:left}.wambatch-lyrics--right{text-align:right}.rabbit-lyrics__line{line-height:1.5em;min-height:1.5em;padding:0 1em}.rabbit-lyrics__line--active{background-color:rgba(0,0,0,.1)}.rabbit-lyrics__inline--active{color:#04a8a8}.wambatch-lyrics--mini{height:1.5em;overflow-y:hidden}.wambatch-lyrics--mini .rabbit-lyrics__line{display:none}.wambatch-lyrics--mini .rabbit-lyrics__line--active{display:block;background:transparent}.wambatch-lyrics--full{height:auto;overflow-y:initial}";
   styleInject(css_248z);
 
   /*
@@ -453,26 +446,15 @@
         var mediaElement = findMediaElement(lyricsElement);
 
         if (mediaElement) {
-          new RabbitLyrics(lyricsElement, mediaElement, wambatchTime);
+          new RabbitLyrics(lyricsElement, mediaElement);
         }
       }
     }
-
-
   }, false);
-
-  function forcechange() {
-    syncData.forEach((item) => {
-      console.log(synclyrics)
-      if (synclyrics >= item.start) lyrics.innerText = item.text
-    })
-  };
 
   exports.default = RabbitLyrics;
 
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  });
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
 //# sourceMappingURL=wambatch-lyrics.umd.development.js.map
