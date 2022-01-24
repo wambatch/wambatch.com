@@ -1,8 +1,9 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global['wambatch-lyrics'] = {}));
-}(this, (function (exports) { 'use strict';
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = global || self, factory(global['wambatch-lyrics'] = {}));
+}(this, (function (exports) {
+  'use strict';
 
   /**
    * Find first audio or video element before lyrics element. Only used when
@@ -79,6 +80,7 @@
   var timeRegex = /\[(\d+:)?\d+:\d+\.\d+\]/;
   var startRegex = /^\[(\d+:)?\d+:\d+\.\d+\]/;
   var endRegex = /\[(\d+:)?\d+:\d+\.\d+\]$/;
+
   function parseLyrics(source) {
     var lines = source.trim().split(/\r\n|\n|\r/).map(function (line) {
       return line.trim();
@@ -191,18 +193,21 @@
    * RabbitLyrics main controller.
    */
 
-  var RabbitLyrics = /*#__PURE__*/function () {
+  var RabbitLyrics = /*#__PURE__*/ function () {
     function RabbitLyrics(
-    /** Lyrics container element. Support data-* attributes for options. */
-    lyricsElement,
-    /** Audio or video element. Note: embeded media elements in <iframe> are not supported. */
-    mediaElement,
-    /** Lyrics options. */
-    options) {
+      /** Lyrics container element. Support data-* attributes for options. */
+      lyricsElement,
+      /** Audio or video element. Note: embeded media elements in <iframe> are not supported. */
+      mediaElement,
+      /** Wambatch Player Time */
+      wambatchTime,
+      /** Lyrics options. */
+      options) {
       var _this = this;
 
       this.lyricsElement = lyricsElement;
       this.mediaElement = mediaElement;
+      this.wambatchTime = wambatchTime;
       this.viewMode = 'clip';
       this.alignment = 'center';
       this.lyrics = '';
@@ -241,7 +246,7 @@
        */
 
 
-      function changelyrics(synclyrics){
+      this.synchronize = function () {
         var time = _this.mediaElement.currentTime;
         var changed = false; // If here are active lines changed
 
@@ -397,10 +402,12 @@
   }();
 
   function styleInject(css, ref) {
-    if ( ref === void 0 ) ref = {};
+    if (ref === void 0) ref = {};
     var insertAt = ref.insertAt;
 
-    if (!css || typeof document === 'undefined') { return; }
+    if (!css || typeof document === 'undefined') {
+      return;
+    }
 
     var head = document.head || document.getElementsByTagName('head')[0];
     var style = document.createElement('style');
@@ -446,17 +453,26 @@
         var mediaElement = findMediaElement(lyricsElement);
 
         if (mediaElement) {
-          new RabbitLyrics(lyricsElement, mediaElement);
+          new RabbitLyrics(lyricsElement, mediaElement, wambatchTime);
         }
       }
     }
 
-    
+
   }, false);
+
+  function forcechange() {
+    syncData.forEach((item) => {
+      console.log(synclyrics)
+      if (synclyrics >= item.start) lyrics.innerText = item.text
+    })
+  };
 
   exports.default = RabbitLyrics;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
 
 })));
 //# sourceMappingURL=wambatch-lyrics.umd.development.js.map
