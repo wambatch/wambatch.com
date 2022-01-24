@@ -304,7 +304,7 @@
 
       this.lyricsElement.scrollTop = 0; // Bind playback update events
 
-      var readTime = function(getTime){
+      function readTime(getTime){
         this.synchronize(getTime);
         console.log("!!!!!!!!!  WAKTU = "+getTime)
       }
