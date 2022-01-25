@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global['wambatch-lyrics'] = {}));
+  (global = global || self, factory(global['rabbit-lyrics'] = {}));
 }(this, (function (exports) { 'use strict';
 
   /**
@@ -230,10 +230,10 @@
             break;
         }
 
-        _this.lyricsElement.classList.remove('wambatch-lyrics--playing', 'wambatch-lyrics--paused', 'wambatch-lyrics--waiting', 'wambatch-lyrics--ended');
+        _this.lyricsElement.classList.remove('rabbit-lyrics--playing', 'rabbit-lyrics--paused', 'rabbit-lyrics--waiting', 'rabbit-lyrics--ended');
 
         if (status) {
-          _this.lyricsElement.classList.add('wambatch-lyrics--' + status);
+          _this.lyricsElement.classList.add('rabbit-lyrics--' + status);
         }
       };
       /**
@@ -241,13 +241,13 @@
        */
 
 
-      this.synchronize = function (getWaktu) {
+      this.synchronize = function (waktu) {
         var time = _this.mediaElement.currentTime;
-        var waktu = getWaktu;
+        var nowtime = waktu;
         var changed = false; // If here are active lines changed
 
         var activeLines = _this.lyricsLines.filter(function (line) {
-          if (waktu >= line.startsAt && waktu < line.endsAt) {
+          if (nowtime >= line.startsAt && nowtime < line.endsAt) {
             // If line should be active
             if (!line.element.classList.contains('rabbit-lyrics__line--active')) {
               // If it hasn't been activated
@@ -256,7 +256,7 @@
             }
 
             line.content.forEach(function (inline) {
-              if (waktu >= inline.startsAt) {
+              if (nowtime >= inline.startsAt) {
                 inline.element.classList.add('rabbit-lyrics__inline--active');
               } else {
                 inline.element.classList.remove('rabbit-lyrics__inline--active');
@@ -304,11 +304,6 @@
 
       this.lyricsElement.scrollTop = 0; // Bind playback update events
 
-      function readTime(getTime){
-        this.synchronize(getTime);
-        console.log("!!!!!!!!!  WAKTU = "+getTime)
-      }
-
       this.mediaElement.addEventListener('timeupdate', this.synchronize);
       this.mediaElement.addEventListener('play', this.handleStatusChange);
       this.mediaElement.addEventListener('playing', this.handleStatusChange);
@@ -330,25 +325,25 @@
 
     _proto.setAlignment = function setAlignment(alignment) {
       this.alignment = alignment;
-      this.lyricsElement.classList.remove('wambatch-lyrics--center', 'wambatch-lyrics--left', 'wambatch-lyrics--right');
-      this.lyricsElement.classList.add('wambatch-lyrics--' + this.alignment);
+      this.lyricsElement.classList.remove('rabbit-lyrics--center', 'rabbit-lyrics--left', 'rabbit-lyrics--right');
+      this.lyricsElement.classList.add('rabbit-lyrics--' + this.alignment);
     }
     /** Change alignment */
     ;
 
     _proto.setViewMode = function setViewMode(viewMode) {
       this.viewMode = viewMode;
-      this.lyricsElement.classList.remove('wambatch-lyrics--clip', 'wambatch-lyrics--full', 'wambatch-lyrics--mini');
-      this.lyricsElement.classList.add('wambatch-lyrics--' + this.viewMode);
+      this.lyricsElement.classList.remove('rabbit-lyrics--clip', 'rabbit-lyrics--full', 'rabbit-lyrics--mini');
+      this.lyricsElement.classList.add('rabbit-lyrics--' + this.viewMode);
     };
 
     _proto.render = function render() {
       var _this2 = this;
 
       // Add class names
-      this.lyricsElement.classList.add('wambatch-lyrics');
-      this.lyricsElement.classList.add('wambatch-lyrics--' + this.viewMode);
-      this.lyricsElement.classList.add('wambatch-lyrics--' + this.alignment);
+      this.lyricsElement.classList.add('rabbit-lyrics');
+      this.lyricsElement.classList.add('rabbit-lyrics--' + this.viewMode);
+      this.lyricsElement.classList.add('rabbit-lyrics--' + this.alignment);
       this.lyricsElement.textContent = null; // Render lyrics lines
 
       this.lyricsLines = parseLyrics(this.lyrics).map(function (line) {
@@ -429,7 +424,7 @@
     }
   }
 
-  var css_248z = ".wambatch-lyrics{position:relative;padding:1em 0;height:16.5em;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth;background-color:#fff;border:1px solid #ddd}.wambatch-lyrics--center{text-align:center}.wambatch-lyrics--left{text-align:left}.wambatch-lyrics--right{text-align:right}.rabbit-lyrics__line{line-height:1.5em;min-height:1.5em;padding:0 1em}.rabbit-lyrics__line--active{background-color:rgba(0,0,0,.1)}.rabbit-lyrics__inline--active{color:#04a8a8}.wambatch-lyrics--mini{height:1.5em;overflow-y:hidden}.wambatch-lyrics--mini .rabbit-lyrics__line{display:none}.wambatch-lyrics--mini .rabbit-lyrics__line--active{display:block;background:transparent}.wambatch-lyrics--full{height:auto;overflow-y:initial}";
+  var css_248z = ".rabbit-lyrics{position:relative;padding:1em 0;height:16.5em;overflow-x:hidden;overflow-y:auto;scroll-behavior:smooth;background-color:#fff;border:1px solid #ddd}.rabbit-lyrics--center{text-align:center}.rabbit-lyrics--left{text-align:left}.rabbit-lyrics--right{text-align:right}.rabbit-lyrics__line{line-height:1.5em;min-height:1.5em;padding:0 1em}.rabbit-lyrics__line--active{background-color:rgba(0,0,0,.1)}.rabbit-lyrics__inline--active{color:#04a8a8}.rabbit-lyrics--mini{height:1.5em;overflow-y:hidden}.rabbit-lyrics--mini .rabbit-lyrics__line{display:none}.rabbit-lyrics--mini .rabbit-lyrics__line--active{display:block;background:transparent}.rabbit-lyrics--full{height:auto;overflow-y:initial}";
   styleInject(css_248z);
 
   /*
@@ -439,11 +434,11 @@
    *
    * License: GNU General Public License version 3
    * Author: Guo Yunhe <i@guoyunhe.com>
-   * Repository: https://github.com/guoyunhe/wambatch-lyrics
+   * Repository: https://github.com/guoyunhe/rabbit-lyrics
    */
 
   document.addEventListener('DOMContentLoaded', function () {
-    var elements = document.getElementsByClassName('wambatch-lyrics');
+    var elements = document.getElementsByClassName('rabbit-lyrics');
 
     for (var i = 0; i < elements.length; i++) {
       var lyricsElement = elements.item(i);
@@ -463,4 +458,4 @@
   Object.defineProperty(exports, '__esModule', { value: true });
 
 })));
-//# sourceMappingURL=wambatch-lyrics.umd.development.js.map
+//# sourceMappingURL=rabbit-lyrics.umd.development.js.map
