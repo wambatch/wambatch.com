@@ -3200,7 +3200,6 @@ function SoundManager(smURL, smID) {
           remove(f, html5_events[f]);
         }
       }
-
     };
 
     /**
@@ -3216,7 +3215,7 @@ function SoundManager(smURL, smID) {
 
       // <d>
       fN = s.id + ': ';
-      sm2._wD(fN + (loadOK ? 'onload()' : 'Failed to load / invalid sound?' + (!s.duration ? ' Zero-length duration reported.' : ' -') + ' (' + s.url + ')'), (loadOK ? 1 : 2));
+      sm2._wD(fN + (loadOK ? 'onload()' : 'loadOK status:' + loadOK + 'Failed to load / invalid sound?' + (!s.duration ? ' Zero-length duration reported.' : ' -') + ' (' + s.url + ')'), (loadOK ? 1 : 2));
 
       if (!loadOK && !s.isHTML5) {
         if (sm2.sandbox.noRemote === true) {
