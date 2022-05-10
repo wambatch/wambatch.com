@@ -3212,7 +3212,6 @@ function SoundManager(smURL, smID) {
       var fN,
           // check for duration to prevent false positives from flash 8 when loading from cache.
           loadOK = !!nSuccess || (!s.isHTML5 && fV === 8 && s.duration);
-      if (!loadOK) music404();
 
       // <d>
       fN = s.id + ': ';
